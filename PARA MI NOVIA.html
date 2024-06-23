@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje de Amor</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Pacifico', cursive;
+            background-color: #ffcccc; /* Cambié el color de fondo a un tono rosa claro */
+            background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%); /* Agregué un degradado de fondo */
+        }
+        .envelope {
+            position: relative;
+            width: 400px; /* Aumenté el ancho del sobre */
+            height: 300px; /* Aumenté la altura del sobre */
+            background: #fff;
+            border: 3px solid #ccc; /* Aumenté el grosor del borde */
+            border-radius: 15px; /* Aumenté el radio de borde */
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Aumenté la sombra */
+            transition: transform 0.3s ease;
+        }
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+        .envelope::before, .envelope::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-color: transparent;
+            transition: all 0.3s ease;
+        }
+        .envelope::before {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 200px 150px 200px; /* Aumenté las dimensiones del borde superior */
+            border-bottom-color: #fff;
+        }
+        .envelope::after {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 150px 200px 0 200px; /* Aumenté las dimensiones del borde inferior */
+            border-top-color: #fff;
+        }
+        .envelope.opened {
+            border-color: transparent;
+        }
+        .envelope.opened::before {
+            border-bottom-color: transparent;
+        }
+        .envelope.opened::after {
+            border-top-color: transparent;
+        }
+        .message {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #333; /* Color de texto oscuro para contrastar con el fondo */
+        }
+        .message p {
+            margin: 0;
+            font-size: 32px; /* Aumenté el tamaño de la fuente para hacerlo más llamativo */
+            font-weight: bold; /* Texto en negrita para resaltar */
+            position: relative; /* Añadí posición relativa para el efecto de sombra */
+        }
+        .message p.heart {
+            color: red;
+            font-size: 40px; /* Tamaño más grande para el corazón */
+            animation: heartbeat 1s infinite; /* Animación de palpitar para el corazón */
+        }
+        .message p::before {
+            content: attr(data-text); /* Usamos attr(data-text) para obtener el texto */
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            color: #ff2d55; /* Color rojo para el efecto de fondo */
+            text-shadow: 
+                1px 1px 2px rgba(255, 45, 85, 0.8),
+                2px 2px 4px rgba(255, 45, 85, 0.6),
+                3px 3px 6px rgba(255, 45, 85, 0.4),
+                4px 4px 8px rgba(255, 45, 85, 0.2); /* Efecto de sombra difusa */
+            opacity: 0.8; /* Opacidad del efecto de fondo */
+        }
+        .message.show {
+            display: block;
+        }
+        .initial-message {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1; /* Asegura que el mensaje inicial esté encima del sobre */
+        }
+        .initial-message p {
+            margin: 0;
+            font-size: 32px; /* Tamaño más grande de fuente para el mensaje inicial */
+            font-weight: bold; /* Texto en negrita para resaltar */
+            color: #333; /* Color de texto oscuro */
+            position: relative; /* Añadí posición relativa para el efecto de sombra */
+        }
+        .initial-message.show {
+            display: block;
+        }
+        .initial-message.hide {
+            display: none;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar mensaje inicial al cargar la página
+            document.querySelector('.initial-message').classList.add('show');
+
+            document.querySelector('.envelope').addEventListener('click', function() {
+                // Ocultar mensaje inicial
+                document.querySelector('.initial-message').classList.add('hide');
+                // Mostrar mensaje de amor
+                document.querySelector('.message').classList.add('show');
+                this.classList.add('opened');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="envelope">
+        <div class="initial-message">
+            <p data-text="Para la niña más hermosa del mundo">Para la niña más hermosa del mundo</p>
+        </div>
+        <div class="message">
+            <p data-text="Te amo">Te amo</p>
+            <p data-text="Vamos a salir adelante ❤">Vamos a salir adelante <span class="heart" data-text="❤">❤</span></p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
